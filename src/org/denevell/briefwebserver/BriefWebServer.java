@@ -14,6 +14,7 @@ public class BriefWebServer {
 	private HttpServer mServer;
 
 	/**
+	 * Start a webserver on port on host
 	 * @param hostname
 	 * @param port
 	 * @throws RuntimeException If we have a problem opening the http server
@@ -21,15 +22,16 @@ public class BriefWebServer {
 	public BriefWebServer(String hostname, int port) {
 		try {
 			mServer = HttpServer.create(new InetSocketAddress(hostname, port), 0);
+			mServer.start();
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
 	}
 
-	public void start() {
-		mServer.start();
-	}
-
+	/**
+	 * Stop listening on the port on the host.
+	 * (Note: Start is called by the controller.)
+	 */
 	public void stop() {
 		mServer.stop(0);
 	}

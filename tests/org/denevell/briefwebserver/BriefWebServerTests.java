@@ -19,7 +19,6 @@ public class BriefWebServerTests {
 			BriefWebServer bws = new BriefWebServer("localhost", 8880);
 			
 			//Act
-			bws.start();
 			bws.stop();
 			Assert.assertTrue(true);
 		} catch(Exception e) {
@@ -34,7 +33,6 @@ public class BriefWebServerTests {
 		BriefWebServer bws = null;
 		try {
 			bws = new BriefWebServer("localhost", 8882);
-			bws.start();
 		
 			//Act
 			URL url = new URL("http://localhost:8882/");
@@ -53,7 +51,6 @@ public class BriefWebServerTests {
 		//Arrange
 		BriefWebServer bws = new BriefWebServer("localhost", 8882);
 		bws.addStub("/", "hiya");
-		bws.start();
 		
 		//Act
 		URL url = new URL("http://localhost:8882/");
@@ -75,7 +72,6 @@ public class BriefWebServerTests {
 		BriefWebServer bws = new BriefWebServer("localhost", 8883);
 		bws.addStub("/one", "hiya");
 		bws.addStub("/two", "there");
-		bws.start();
 		
 		//Act
 		try {
@@ -102,7 +98,6 @@ public class BriefWebServerTests {
 		//Arrange
 		BriefWebServer bws = new BriefWebServer("localhost", 8884);
 		bws.addStub("/thing", "hiya");
-		bws.start();
 		
 		//Act
 		URL url = new URL("http://localhost:8884/WRONG");
@@ -121,7 +116,6 @@ public class BriefWebServerTests {
 		//Arrange
 		BriefWebServer bws = new BriefWebServer("localhost", 8882);
 		bws.addStub("/", "one\ntwo");
-		bws.start();
 		
 		//Act
 		URL url = new URL("http://localhost:8882/");
@@ -144,7 +138,6 @@ public class BriefWebServerTests {
 		//Arrange
 		BriefWebServer bws = new BriefWebServer("localhost", 8882);
 		bws.addStub("/thing", "one\ntwo");
-		bws.start();
 		
 		//Act
 		try {
@@ -164,7 +157,6 @@ public class BriefWebServerTests {
 		//Arrange
 		BriefWebServer bws = new BriefWebServer("localhost", 8882);
 		bws.addStub("/thing", "one\ntwo");
-		bws.start();
 		
 		//Act
 		try {
@@ -183,7 +175,6 @@ public class BriefWebServerTests {
 		//Arrange
 		BriefWebServer bws = new BriefWebServer("localhost", 8882);
 		bws.addStub("/thing", "one\ntwo");
-		bws.start();
 		
 		//Act
 		try {
