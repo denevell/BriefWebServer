@@ -10,7 +10,7 @@ See the tests for its usage. But quickly:
 	
 Then the code you're testing can simply talk to localhost on 8882 with the path /thing to get the data. I.e.
 
-	URL url = new URL("http://localhost:8882/");
+	URL url = new URL("http://localhost:8882/thing");
 	BufferedReader result = new BufferedReader(new InputStreamReader(url.openStream()));
 
 Then use result.readLine() until you get a null.
