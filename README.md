@@ -1,7 +1,10 @@
 BriefWebServer
 ==============
 
-A quick web server in Java - used for mocking out web servers with stub data.
+A quick web server in Java - used for mocking out web servers with stub data in tests.
+
+Usage
+=====
 
 See the tests for its usage. But quickly:
 
@@ -23,3 +26,18 @@ After you've finished, you must run to stop listening on the port at the host:
 
 	bws.stop();
 
+Installation
+============
+
+The jars are located at: http://ivy.denevell.org/denevell/BriefWebServer/
+
+You can install it using the Apache Ivy extension to Apache Ant
+
+Add, in ivysettings.xml, this resolver: <ibiblio name="denevell" root="http://ivy.denevell.org/"/>
+
+And, in ivy.xml, add this dependency: <dependency org="denevell" name="BriefWebServer" rev="0.1"/>
+
+News
+====
+
+0.1 - Basic stubbing of data at URLs.
