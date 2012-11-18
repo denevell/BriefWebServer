@@ -1,2 +1,5 @@
 .settings
 bin
+ivysettings.xml
+distrib
+build

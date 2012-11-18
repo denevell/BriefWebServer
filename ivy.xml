@@ -1,0 +1,6 @@
+ <ivy-module version="2.0">
+   <info organisation="denevell" module="BriefWebServer"/>
+   <publications>
+     <artifact name="BriefWebServer" ext="jar" type="jar"/>
+   </publications>
+ </ivy-module>
