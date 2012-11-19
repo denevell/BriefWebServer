@@ -35,14 +35,17 @@ You can install it using the Apache Ivy extension to Apache Ant
 
 Add, in ivysettings.xml, this resolver: 
 
-	<ibiblio name="denevell" root="http://ivy.denevell.org/" 
-		pattern="[organisation]/[module]/[revision]/[artifact]-[revision].[ext]"/>
+            <url name="denevell">
+		  <ivy      pattern="http://ivy.denevell.org/[organisation]/[module]/[revision]/ivy-[revision].xml" />
+		  <artifact pattern="http://ivy.denevell.org/[organisation]/[module]/[revision]/[artifact]-[revision].[ext]" />
+	    </url>
 
 And, in ivy.xml, add this dependency: 
 
-	<dependency org="denevell" name="BriefWebServer" rev="0.1"/>
+	<dependency org="denevell" name="BriefWebServer" rev="0.1.1"/>
 
 News
 ====
 
+0.1.1 - Added javadoc
 0.1 - Basic stubbing of data at URLs.
