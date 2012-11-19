@@ -9,9 +9,15 @@ import java.net.URL;
 
 import com.sun.net.httpserver.*;
 
+/**
+ * A simple web server to ues in unit / integration / system tests.
+ * You quickly start it up, give it some stub data at a path, and
+ * then close it down when your tests are finished.
+ * @author denevell
+ */
 public class BriefWebServer {
 
-	private HttpServer mServer;
+	private final HttpServer mServer;
 
 	/**
 	 * Start a webserver on port on host

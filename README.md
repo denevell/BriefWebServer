@@ -35,7 +35,8 @@ You can install it using the Apache Ivy extension to Apache Ant
 
 Add, in ivysettings.xml, this resolver: 
 
-	<ibiblio name="denevell" root="http://ivy.denevell.org/"/>
+	<ibiblio name="denevell" root="http://ivy.denevell.org/" 
+		pattern="[organisation]/[module]/[revision]/[artifact]-[revision].[ext]"/>
 
 And, in ivy.xml, add this dependency: 
 

@@ -1,12 +1,14 @@
 <project name="BriefWebServer" basedir="." default="jar" xmlns:ivy="antlib:org.apache.ivy.ant">
 
-	<property name="version" value="0.1" />
+	<property name="version" value="0.1.1" />
 
 	<property name="src.dir" value="src" />
 	<property name="build.dir" value="build" />
 	<property name="classes.dir" value="${build.dir}/classes" />
 	<property name="jar.dir" value="${build.dir}/jar" />
 	<property name="jar.name" value="BriefWebServer.jar" />
+	<property name="jardoc.name" value="BriefWebServer-javadoc.jar" />
+	<property name="doc.dir" value="doc" />
 	<property name="package.name" value="org.denevell.briefwebserver" />
 
 	<target name="clean">
@@ -32,13 +34,24 @@
 		</jar>
 	</target>
 	
-	<target name="publish">
+	<target name="publish" depends="jar,doc-jar">
 		<ivy:resolve/>
 		<ivy:publish status="release" pubrevision="${version}" resolver="ssh"  overwrite="true" update="true">
 		   <artifacts pattern="build/jar/[artifact].[ext]"/> 
 		</ivy:publish>
 	</target>
 	
+	<target name="doc">
+		<javadoc sourcepath="${src.dir}" destdir="${doc.dir}" />
+	</target>
+
+	<target name="doc-jar" depends="doc">
+		<mkdir dir="${jar.dir}" />
+		<jar destfile="${jar.dir}/${jardoc.name}" basedir="${doc.dir}">
+			<manifest>
+			</manifest>
+		</jar>
+	</target>
 
 </project>
 
