@@ -3,5 +3,6 @@
    <publications>
      <artifact name="BriefWebServer" ext="jar" type="jar"/>
      <artifact name="BriefWebServer-javadoc" ext="jar" type="jar"/>
+     <artifact name="BriefWebServer-sources" ext="jar" type="jar"/>
    </publications>
  </ivy-module>

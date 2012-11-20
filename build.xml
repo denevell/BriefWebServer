@@ -1,6 +1,6 @@
 <project name="BriefWebServer" basedir="." default="jar" xmlns:ivy="antlib:org.apache.ivy.ant">
 
-	<property name="version" value="0.1.1" />
+	<property name="version" value="0.2.0" />
 
 	<property name="src.dir" value="src" />
 	<property name="build.dir" value="build" />
@@ -8,6 +8,7 @@
 	<property name="jar.dir" value="${build.dir}/jar" />
 	<property name="jar.name" value="BriefWebServer.jar" />
 	<property name="jardoc.name" value="BriefWebServer-javadoc.jar" />
+	<property name="sourcesjar.name" value="BriefWebServer-sources.jar" />
 	<property name="doc.dir" value="doc" />
 	<property name="package.name" value="org.denevell.briefwebserver" />
 
@@ -34,9 +35,9 @@
 		</jar>
 	</target>
 	
-	<target name="publish" depends="jar,doc-jar">
+	<target name="publish" depends="jar,doc-jar,src-jar">
 		<ivy:resolve/>
-		<ivy:publish status="release" pubrevision="${version}" resolver="ssh"  overwrite="true" update="true">
+		<ivy:publish overwrite="true" status="release" pubrevision="${version}" resolver="ssh">
 		   <artifacts pattern="build/jar/[artifact].[ext]"/> 
 		</ivy:publish>
 	</target>
@@ -48,6 +49,14 @@
 	<target name="doc-jar" depends="doc">
 		<mkdir dir="${jar.dir}" />
 		<jar destfile="${jar.dir}/${jardoc.name}" basedir="${doc.dir}">
+			<manifest>
+			</manifest>
+		</jar>
+	</target>
+
+	<target name="src-jar">
+		<mkdir dir="${jar.dir}" />
+		<jar destfile="${jar.dir}/${sourcesjar.name}" basedir="${src.dir}">
 			<manifest>
 			</manifest>
 		</jar>
