@@ -5,6 +5,7 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.net.BindException;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -13,7 +14,7 @@ import java.net.URL;
 import java.util.Hashtable;
 
 /**
- * A simple web server to ues in unit / integration / system tests.
+ * A simple web server to use in unit / integration / system tests.
  * You quickly start it up, give it some stub data at a path, and
  * then close it down when your tests are finished.
  * @author denevell
@@ -32,11 +33,26 @@ public class BriefWebServer {
 	 */
 	public BriefWebServer(String hostname, int port) {
 		try {
-			mServer = new ServerSocket(port, 0, InetAddress.getByName(hostname));
+			mServer = findSocketWithGoodPort(port, hostname);
 			startWaitingForConnections();
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
+	}
+	
+	/**
+	 * Iterates through ports until it finds a good one
+	 * @param port
+	 * @param hostname
+	 * @return
+	 * @throws IOException
+	 */
+	private ServerSocket findSocketWithGoodPort(int port, String hostname) throws IOException {
+		try {
+			return new ServerSocket(port, 0, InetAddress.getByName(hostname));
+		} catch(BindException e) {
+			return findSocketWithGoodPort(++port, hostname);
+		} 
 	}
 
 	private void startWaitingForConnections() {
@@ -70,11 +86,6 @@ public class BriefWebServer {
 					}
 				} catch (Exception e) {
 					if(e instanceof SocketException && mSocketIsClosed) {
-						try {
-							clientSocket.close();
-						} catch (IOException e1) {
-							//Okay...
-						}
 						//This is to be expected
 					} else {
 						throw new RuntimeException(e);
@@ -196,5 +207,14 @@ public class BriefWebServer {
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
+	}
+
+	/**
+	 * Returns the port we're using. 
+	 * May not be the one requested if it was in use.
+	 * @return
+	 */
+	public final int getPort() {
+		return mServer.getLocalPort();
 	}
 }
