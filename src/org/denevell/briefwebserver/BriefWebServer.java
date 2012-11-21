@@ -183,14 +183,18 @@ public class BriefWebServer {
 	 * @return The entire result of calling hostname:port/path
 	 * @throws IOException If there was a problem getting this data i.e couldn't connect, or bad path
 	 */
-	public String getStringFromContext(String path) throws IOException {
-		URL url = new URL("http://"+mServer.getInetAddress().getHostName()+":"+mServer.getLocalPort()+path);
-		BufferedReader result = new BufferedReader(new InputStreamReader(url.openStream()));
-		String stringResult = "";
-		String s = "";
-		while((s = result.readLine())!=null) {
-			stringResult += s + "\n";
+	public String getStringFromContext(String path) {
+		try {
+			URL url = new URL("http://"+mServer.getInetAddress().getHostName()+":"+mServer.getLocalPort()+path);
+			BufferedReader result = new BufferedReader(new InputStreamReader(url.openStream()));
+			String stringResult = "";
+			String s = "";
+			while((s = result.readLine())!=null) {
+				stringResult += s + "\n";
+			}
+			return stringResult.substring(0, stringResult.length()-1); //get rid of the final \n
+		} catch (Exception e) {
+			throw new RuntimeException(e);
 		}
-		return stringResult.substring(0, stringResult.length()-1); //get rid of the final \n
 	}
 }

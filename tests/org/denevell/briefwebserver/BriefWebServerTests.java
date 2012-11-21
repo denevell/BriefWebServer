@@ -192,15 +192,9 @@ public class BriefWebServerTests {
 		bws.addStub("/thing", "one\ntwo");
 		
 		//Act
-		try {
-			String s  = bws.getStringFromContext("/WRONG");
-			Assert.assertFalse("Expected exception: " + s, true);
-		} catch(IOException e) {
-			//Assert
-			//Good
-		} finally {
-			bws.stop();
-		}
+		String s  = bws.getStringFromContext("/WRONG");
+		Assert.assertFalse("Expected exception: " + s, true);
+		bws.stop();
 	}
 	
 	@Test
@@ -208,17 +202,12 @@ public class BriefWebServerTests {
 		//Arrange
 		BriefWebServer bws = new BriefWebServer("localhost", 8888);
 		bws.addStub("/thing", "one\ntwo");
-		
 		//Act
-		try {
-			String s  = bws.getStringFromContext("/thingx");
-			Assert.assertFalse("Expected exception: " + s, true);
-		} catch(IOException e) {
-			//Assert
-			//Good
-		} finally {
-			bws.stop();
-		}
+		String s  = bws.getStringFromContext("/thingx");
+		Assert.assertFalse("Expected exception: " + s, true);
+		//Assert
+		//Good
+		bws.stop();
 	}
 	
 }
