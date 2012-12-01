@@ -2,7 +2,7 @@
    <info organisation="denevell" module="BriefWebServer"/>
    <publications>
      <artifact name="BriefWebServer" ext="jar" type="jar"/>
-     <artifact name="BriefWebServer-javadoc" ext="jar" type="jar"/>
-     <artifact name="BriefWebServer-sources" ext="jar" type="jar"/>
+     <artifact name="BriefWebServer-javadoc" ext="jar" type="javadoc"/>
+     <artifact name="BriefWebServer-sources" ext="jar" type="source"/>
    </publications>
  </ivy-module>

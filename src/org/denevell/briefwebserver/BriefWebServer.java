@@ -24,6 +24,7 @@ public class BriefWebServer {
 	private final ServerSocket mServer;
 	private final Hashtable<String, String> mPathAndResults = new Hashtable<String, String>();
 	private boolean mSocketIsClosed;
+	private long mGetWaitPeriod = 0;
 
 	/**
 	 * Start a webserver on port on host
@@ -65,6 +66,8 @@ public class BriefWebServer {
 					while(true && !mServer.isClosed()) {
 				        clientSocket = mServer.accept();
 				        
+				        waitForPeriodOfTime(this);
+				        
 				        BufferedWriter out = new BufferedWriter(new OutputStreamWriter(clientSocket.getOutputStream()));
 						BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 						
@@ -93,11 +96,21 @@ public class BriefWebServer {
 				}
 					
 			}
-
-
-			
 		}).start();
 	}			
+	
+	/**
+	 * Called from every socket accept we get
+	 * @param thiz
+	 * @throws InterruptedException
+	 */
+	private void waitForPeriodOfTime(Object thiz) throws InterruptedException {
+		if(getGetWaitPeriod()!=0) {
+			synchronized (thiz) {
+			    thiz.wait(getGetWaitPeriod());
+			}
+		}
+	}
 	
 	/**
 	 * Once you've got the socket's OutputStream, write the response to it.
@@ -216,5 +229,13 @@ public class BriefWebServer {
 	 */
 	public final int getPort() {
 		return mServer.getLocalPort();
+	}
+
+	public long getGetWaitPeriod() {
+		return mGetWaitPeriod;
+	}
+
+	public void setGetWaitPeriod(long mGetWaitPeriod) {
+		this.mGetWaitPeriod = mGetWaitPeriod;
 	}
 }
