@@ -49,7 +49,11 @@ News
 ====
 
 0.2.3 - Added definable wait period
+
 0.2.2 - Uses the first port available to avoid throwing an exception if we can't bind to a port
+
 0.2.0 - Now implemented using sockets so as to be embedded in an Android app
+
 0.1.1 - Added javadoc
+
 0.1 - Basic stubbing of data at URLs.
