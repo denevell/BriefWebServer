@@ -27,24 +27,6 @@ After you've finished, you must run to stop listening on the port at the host:
 
 	bws.stop();
 
-Installation
-============
-
-The jars are located at: http://ivy.denevell.org/denevell/BriefWebServer/
-
-You can install it using the Apache Ivy extension to Apache Ant
-
-Add, in ivysettings.xml, this resolver: 
-
-            <url name="denevell">
-		  <ivy      pattern="http://ivy.denevell.org/[organisation]/[module]/[revision]/ivy-[revision].xml" />
-		  <artifact pattern="http://ivy.denevell.org/[organisation]/[module]/[revision]/[artifact]-[revision].[ext]" />
-	    </url>
-
-And, in ivy.xml, add this dependency: 
-
-	<dependency org="denevell" name="BriefWebServer" rev="0.2.3"/>
-
 News
 ====
 
